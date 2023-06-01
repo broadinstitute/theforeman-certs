@@ -27,4 +27,8 @@ class certs::params {
   $qpid_router_client_cert = "${pki_dir}/qpid_router_client.crt"
   $qpid_router_server_key  = "${pki_dir}/qpid_router_server.key"
   $qpid_router_client_key  = "${pki_dir}/qpid_router_client.key"
+
+  # Generate and cache the password on the master once
+  # In multi-puppetmaster setups, the user should specify their own
+  $ca_key_password = extlib::cache_data('foreman_cache_data', 'ca_key_password', extlib::random_password(24))
 }
